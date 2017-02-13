@@ -1,5 +1,5 @@
 $(document).on("pagecreate", "#home", function() {
-    populateTopMovies();
+    setTimeout(function() {populateTopMovies()}, 350);
 });
 $(document).on("pagebeforecreate", function(event) {
     preload();
@@ -12,7 +12,7 @@ $(document).on("pagecreate", "#search", function() {
     });
 });
 $(document).on("pagecreate", "#watchlist", function() {
-    populateWatchlist();
+    setTimeout(function() {populateWatchlist()}, 350);
 });
 
 var baseDBurl = "https://api.themoviedb.org/3";
