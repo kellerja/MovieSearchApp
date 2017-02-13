@@ -1,0 +1,12 @@
+@media all and (min-width: 45em) {
+    .grid-image-size.ui-grid-a .ui-block-a {
+        width: 21.375em;
+    }
+    .grid-image-size.ui-grid-a .ui-block-b {
+        padding-left: 2em;
+    }
+}
+
+.footer {
+    text-align: center;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+    <head>
+        <meta charset="utf-8">
+        <title>App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="scripts/jquery.min.js"></script>
+        <link rel="stylesheet" href="styles/jquery.mobile.min.css">
+        <script src="scripts/jquery.mobile.min.js"></script>
+        <link rel="stylesheet" href="styles/main.css">
+        <script src="scripts/app.js"></script>
+    </head>
+    <body>
+        <div id="home" data-role="page">
+            <div data-role="header" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a href="#home" onclick="populateTopMovies()" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
+                        <li><a href="#search" data-icon="search">Search</a></li>
+                        <li><a href="#watchlist" onclick="populateWatchlist()" data-icon="video">Watchlist</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ol data-role="listview" id="topmovies">
+                </ol>
+            </div>
+            <div data-role="footer" data-position="fixed" class="footer">
+                <button onclick="populateTopMovies()" class="ui-btn ui-icon-refresh ui-btn-icon-left">Refresh list</button>
+            </div>
+        </div>
+        <div id="search" data-role="page">
+            <div data-role="header" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a href="#home" onclick="populateTopMovies()" data-icon="home">Home</a></li>
+                        <li><a href="#search" data-icon="search" class="ui-btn-active ui-state-persist">Search</a></li>
+                        <li><a href="#watchlist" onclick="populateWatchlist()" data-icon="video">Watchlist</a></li>
+                    </ul>
+                </div>
+                <form action="javascript:search()" class="ui-filterable">
+                    <label for="searchbar" class="ui-hidden-accessible">Search</label>
+                    <input type="search" name="searchbar" id="searchbar" placeholder="Search" autocomplete="off">
+                </form>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ol data-role="listview" id="searchresults">
+                </ol>
+            </div>
+            <div data-role="footer" data-position="fixed" class="footer"></div>
+        </div>
+        <div id="watchlist" data-role="page">
+            <div data-role="header" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a href="#home" onclick="populateTopMovies()" data-icon="home">Home</a></li>
+                        <li><a href="#search" data-icon="search">Search</a></li>
+                        <li><a href="#watchlist" onclick="populateWatchlist()" data-icon="video" class="ui-btn-active ui-state-persist">Watchlist</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ol data-role="listview" id="watchlistmovies">
+                </ol>
+            </div>
+            <div data-role="footer" data-position="fixed" class="footer">
+                <div data-role="collapsible" id="searchCollapsible">
+                    <h1>Sort</h1>
+                    <select id="watchlistSortOption" onchange="populateWatchlist()">
+                        <option value="default">Added to list</option>
+                        <option value="rating">Rating</option>
+                        <option value="release">Release</option>
+                        <option value="name">Name</option>
+                    </select>
+                    <input id="watchlistSortOrder" type="checkbox" data-role="flipswitch" onchange="populateWatchlist()" data-on-text="Asc" data-off-text="Desc" checked>
+                </div>
+            </div>
+        </div>
+        <div id="details" data-role="page">
+            <div data-role='panel' id='detailspanel' data-display='overlay' data-position='right'></div>
+            <div data-role="header" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a href="#home" onclick="populateTopMovies()" data-icon="home">Home</a></li>
+                        <li><a href="#search" data-icon="search">Search</a></li>
+                        <li><a href="#watchlist" onclick="populateWatchlist()" data-icon="video">Watchlist</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content" id="moviedetails">
+            </div>
+            <div data-role="footer" data-position="fixed" id="moviedetailsfooter" class="footer"></div>
+        </div>
+    </body>
+</html>

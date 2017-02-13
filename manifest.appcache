@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# version 6
+index.html
+#jquery 2.1.4
+scripts/jquery.min.js
+#jquery mobile 1.4.5
+styles/jquery.mobile.min.css
+styles/images/ajax-loader.gif
+scripts/jquery.mobile.min.js
+#application
+scripts/app.js
+styles/main.css
+
+FALLBACK:
+/ images/unavailable.png
+
+NETWORK:
+*
