@@ -1,5 +1,5 @@
 $(document).on("pagecreate", "#home", function() {
-    setTimeout(function() {populateTopMovies()}, 350);
+    populateTopMovies();
 });
 $(document).on("pagebeforecreate", function(event) {
     preload();
@@ -12,7 +12,7 @@ $(document).on("pagecreate", "#search", function() {
     });
 });
 $(document).on("pagecreate", "#watchlist", function() {
-    setTimeout(function() {populateWatchlist()}, 350);
+    setTimeout(function() {populateWatchlist()}, 400);
 });
 
 var baseDBurl = "https://api.themoviedb.org/3";
@@ -63,7 +63,7 @@ function getSortedWatchlist() {
 
 function populateWatchlist() {
     if (config === null) {
-        getConfiguration();
+        //getConfiguration();
     }
     $("#watchlistmovies").hide().fadeIn("500");
     $("#watchlistmovies").html(createList(getSortedWatchlist()));
@@ -195,7 +195,7 @@ function populateDetails(index) {
     var url = baseDBurl + "/movie/" + index + "?api_key=" + apikey + "&append_to_response=credits,videos";
     $.get(url, function(data) {
         if (config === null) {
-            getConfiguration();
+            //getConfiguration();
         }
         putDetailsToPage(data, index);
     }).fail(function() {
@@ -273,7 +273,7 @@ function populateTopMovies() {
     $("#topmovies").hide();    
     $.get(url, function(data) {
         if (config === null) {
-            getConfiguration();
+            //getConfiguration();
         }
         $("#topmovies").html(createList(data.results)).fadeIn("500");
         $("#topmovies").listview().listview("refresh");
@@ -286,7 +286,7 @@ function getConfiguration() {
     var configUrl = baseDBurl + "/configuration?api_key=" + apikey;
     $.ajax({url: configUrl, success: function(data) {
         config = data;
-    }, cache: false});
+    }, cache: true});
 }
 
 function search() {
