@@ -1,5 +1,5 @@
 $(document).on("pagecreate", "#home", function() {
-    populateTopMovies();
+    setTimeout(function() {populateTopMovies()}, 250);
 });
 $(document).on("pagebeforecreate", function(event) {
     preload();
@@ -63,7 +63,7 @@ function getSortedWatchlist() {
 
 function populateWatchlist() {
     if (config === null) {
-        //getConfiguration();
+        getConfiguration();
     }
     $("#watchlistmovies").hide().fadeIn("500");
     $("#watchlistmovies").html(createList(getSortedWatchlist()));
@@ -182,11 +182,20 @@ function getPopupForVideos(videos) {
 }
 
 function updateVideoPlayerSize(id) {
-    var videoWidth = $(window).width() * 0.8;
+    $(window).resize(function() {
+        var screenWidth = $(window).width();
+        var screenHeight = $(window).height();
+        var videoWidth = screenWidth * 0.8;
+        $("#" + id + " .video").width(videoWidth).height(videoWidth / 1.777777);
+    });
+    var screenWidth = $(window).width();
+    var screenHeight = $(window).height();
+    var videoWidth = screenWidth * 0.8;
     $("#" + id + " .video").width(videoWidth).height(videoWidth / 1.777777);
 }
 
 function stopVideoWhenPopupCloses(id) {
+    $(window).off("resize");
     var video = $("#" + id + " .video");
     video.attr("src", video.attr("src"));
 }
@@ -195,7 +204,7 @@ function populateDetails(index) {
     var url = baseDBurl + "/movie/" + index + "?api_key=" + apikey + "&append_to_response=credits,videos";
     $.get(url, function(data) {
         if (config === null) {
-            //getConfiguration();
+            getConfiguration();
         }
         putDetailsToPage(data, index);
     }).fail(function() {
@@ -273,7 +282,7 @@ function populateTopMovies() {
     $("#topmovies").hide();    
     $.get(url, function(data) {
         if (config === null) {
-            //getConfiguration();
+            getConfiguration();
         }
         $("#topmovies").html(createList(data.results)).fadeIn("500");
         $("#topmovies").listview().listview("refresh");
